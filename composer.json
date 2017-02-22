@@ -1,0 +1,19 @@
+{
+    "name": "deveative/easy-form",
+    "type": "library",
+    "require": {
+        "phpmailer/phpmailer": "^5.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Deveative\\EasyForm\\": "src/"
+        }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "hizatama",
+            "email": "hiza44@gmail.com"
+        }
+    ]
+}

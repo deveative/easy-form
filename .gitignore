@@ -1,0 +1,17 @@
+*~
+*.bak
+.DS_Store
+.buildpath
+.project
+.settings
+*.tmproj
+build
+.idea
+nbproject/
+*.sublime-project
+*.sublime-workspace
+node_modules
+vendor
+
+Thumbs.db
+desktop.ini
