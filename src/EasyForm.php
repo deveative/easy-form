@@ -44,20 +44,17 @@ class EasyForm {
                     break;
             }
 
-            $this->fields[$name] = new Field\Text(); // TODO: Set Class Field\XXX from variable
+            $this->fields[$name] = new Field\Text(
+                $name,
+                isset($this->postData[$name])? $this->postData[$name] : '',
+                isset($data['attr'])? $data['attr'] : []);
+                // TODO: Set Class Field\XXX from variable
         }
     }
 
-    public function __get($name)
-    {
-        if(isset($this->fields[$name])){
-            return $this->fields[$name];
-        }
-
-        return null;
-    }
-
-
+    /////////////////////////////////////////////
+    // Form tags
+    /////////////////////////////////////////////
     public function open($action='')
     {
         echo '<form action="'.$action.'">';
@@ -68,4 +65,22 @@ class EasyForm {
         echo '</form>';
     }
 
+    /////////////////////////////////////////////
+    // MagicMethods for Fields
+    /////////////////////////////////////////////
+    public function __get($name)
+    {
+        if(isset($this->fields[$name])){
+            return $this->fields[$name];
+        }
+
+        return null;
+    }
+
+    public function __call($name, array $arguments)
+    {
+        if(isset($this->fields[$name])){
+            $this->fields[$name]->output();
+        }
+    }
 }

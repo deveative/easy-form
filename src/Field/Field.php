@@ -22,6 +22,14 @@ abstract class Field {
      */
     abstract protected function getCode();
 
+    public function __construct($type, $name, $value, array $attr=[])
+    {
+        $this->type = $type;
+        $this->name = $name;
+        $this->value = $value;
+        $this->attr = $attr;
+    }
+
     /**
      * Print html of element
      */
@@ -29,4 +37,8 @@ abstract class Field {
         echo $this->getCode();
     }
 
+    public function __toString()
+    {
+        return $this->value;
+    }
 }
