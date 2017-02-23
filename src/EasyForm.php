@@ -34,7 +34,7 @@ class EasyForm {
         $this->fields = [];
         $fields = $this->config->get('field', []);
         foreach ($fields as $name => $data) {
-            switch ($data['type']) {
+            switch (@$data['type']) {
                 case 'email':
                     $fieldType = 'Field\\Email';
                     break;
@@ -80,7 +80,7 @@ class EasyForm {
     public function __call($name, array $arguments)
     {
         if(isset($this->fields[$name])){
-            $this->fields[$name]->output();
+            $this->fields[$name]->render();
         }
     }
 }

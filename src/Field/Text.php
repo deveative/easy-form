@@ -9,7 +9,7 @@ class Text extends Field {
         parent::__construct('text', $name, $value, $attr);
     }
 
-    protected function getCode(){
+    public function getHtml(){
         $attr = $this->getAttrHtml();
         return '<input type="text" name="'.$this->name.'" value="'.$this->value.'"'.$attr.'>';
     }

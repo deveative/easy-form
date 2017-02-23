@@ -20,7 +20,7 @@ abstract class Field {
      * Get html of input-field
      * @return string       tag code
      */
-    abstract protected function getCode();
+    abstract public function getHtml();
 
     public function __construct($type, $name, $value, array $attr=[])
     {
@@ -30,11 +30,16 @@ abstract class Field {
         $this->attr = $attr;
     }
 
+    public function value()
+    {
+        return $this->value;
+    }
+
     /**
      * Print html of element
      */
-    public function output() {
-        echo $this->getCode();
+    public function render() {
+        echo $this->getHtml();
     }
 
     public function __toString()
