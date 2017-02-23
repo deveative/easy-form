@@ -41,4 +41,14 @@ abstract class Field {
     {
         return $this->value;
     }
+
+    public function getAttrHtml()
+    {
+        $attr = '';
+        foreach ($this->attr as $k => $v) {
+            $attr .= ' '.$k.'="'.$v.'"';
+        }
+        return $attr;
+    }
+
 }

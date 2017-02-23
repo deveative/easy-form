@@ -10,8 +10,8 @@ class Text extends Field {
     }
 
     protected function getCode(){
-        // TODO more attributes..
-        return '<input type="text" name="'.$this->name.'">';
+        $attr = $this->getAttrHtml();
+        return '<input type="text" name="'.$this->name.'" value="'.$this->value.'"'.$attr.'>';
     }
 
 }
