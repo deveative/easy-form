@@ -18,7 +18,7 @@ class EasyForm {
     /** @var array form fields */
     protected $fields;
 
-    function __construct(array $postData=[], $config=[])
+    function __construct(array $config=[], array $postData=[])
     {
         if(!(is_array($config) || $config instanceof Config)){
             throw new InvalidArgumentException(
