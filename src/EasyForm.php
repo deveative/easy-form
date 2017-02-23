@@ -15,6 +15,9 @@ class EasyForm {
     /** @var Deveative\EasyForm\Config settings */
     protected $config;
 
+    /** @var array form fields */
+    protected $fields;
+
     function __construct(array $postData=[], $config=[])
     {
         if(!(is_array($config) || $config instanceof Config)){
@@ -24,5 +27,45 @@ class EasyForm {
 
         $this->postData = $postData;
         $this->config = is_array($config) ? new Config($config) : $config;
+        $this->loadFields();
     }
+
+    protected function loadFields(){
+        $this->fields = [];
+        $fields = $this->config->get('field', []);
+        foreach ($fields as $name => $data) {
+            switch ($data['type']) {
+                case 'email':
+                    $fieldType = 'Field\\Email';
+                    break;
+                    // TODO: more types...
+                default:
+                    $fieldType = 'Field\\Text';
+                    break;
+            }
+
+            $this->fields[$name] = new Field\Text(); // TODO: Set Class Field\XXX from variable
+        }
+    }
+
+    public function __get($name)
+    {
+        if(isset($this->fields[$name])){
+            return $this->fields[$name];
+        }
+
+        return null;
+    }
+
+
+    public function open($action='')
+    {
+        echo '<form action="'.$action.'">';
+    }
+
+    public function close()
+    {
+        echo '</form>';
+    }
+
 }
