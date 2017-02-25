@@ -122,14 +122,21 @@ class EasyFormTest extends TestCase
         $form->open();
         $output=ob_get_clean();
 
-        $this->assertSame($output, '<form action="">');
+        $this->assertSame($output, '<form action="" method="post">');
 
-        // with arguments
+        // with one argument
         ob_start();
         $form->open('/hoge/fuga');
         $output=ob_get_clean();
 
-        $this->assertSame($output, '<form action="/hoge/fuga">');
+        $this->assertSame($output, '<form action="/hoge/fuga" method="post">');
+
+        // with two arguments
+        ob_start();
+        $form->open('/foo/bar', 'get');
+        $output=ob_get_clean();
+
+        $this->assertSame($output, '<form action="/foo/bar" method="get">');
     }
 
     public function testClose()
@@ -141,6 +148,42 @@ class EasyFormTest extends TestCase
         $output=ob_get_clean();
 
         $this->assertSame($output, '</form>');
+    }
+
+    public function testIsPosted()
+    {
+        $form = new EasyForm\EasyForm($this->settings);
+        $this->assertSame($form->isPosted(), false);
+
+        $form = new EasyForm\EasyForm($this->settings, []);
+        $this->assertSame($form->isPosted(), false);
+
+        $form = new EasyForm\EasyForm($this->settings, $this->postData);
+        $this->assertSame($form->isPosted(), true);
+    }
+
+    public function testValidation()
+    {
+        $settings = [
+            'field' => [
+                'field1' => [
+                    'rules' => [
+                        'required' => [],
+                        'class' => 'input-text'
+                    ]
+                ],
+                'firstname' => [
+                    'attr' => [
+                        'id' => 'input_firstname',
+                        'class' => 'input-text'
+                    ]
+                ],
+            ]
+        ];
+        $form = new EasyForm\EasyForm($this->settings, []);
+        $this->assertSame($form->getMessages(), []);
+
+        $form->validate();
     }
 
 }

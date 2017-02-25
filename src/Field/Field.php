@@ -10,6 +10,9 @@ abstract class Field {
     /** @var string field name attribute */
     protected $name='';
 
+    /** @var string field name(for render) */
+    protected $label='';
+
     /** @var string field value */
     protected $value='';
 
@@ -22,12 +25,18 @@ abstract class Field {
      */
     abstract public function getHtml();
 
-    public function __construct($type, $name, $value, array $attr=[])
+    public function __construct($type, $name, $label, $value, array $attr=[])
     {
         $this->type = $type;
         $this->name = $name;
+        $this->label = $label;
         $this->value = $value;
         $this->attr = $attr;
+    }
+
+    public function getLabel()
+    {
+        return $this->label;
     }
 
     public function value()

@@ -4,9 +4,9 @@ namespace Deveative\EasyForm\Field;
 
 class Text extends Field {
 
-    public function __construct($name, $value, array $attr=[])
+    public function __construct($name, $label, $value, array $attr=[])
     {
-        parent::__construct('text', $name, $value, $attr);
+        parent::__construct('text', $name, $label, $value, $attr);
     }
 
     public function getHtml(){
