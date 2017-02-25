@@ -36,19 +36,19 @@ class EasyForm {
         foreach ($fields as $name => $data) {
             switch (@$data['type']) {
                 case 'email':
-                    $fieldType = 'Field\\Email';
+                    $fieldType = 'Email';
                     break;
                     // TODO: more types...
                 default:
-                    $fieldType = 'Field\\Text';
+                    $fieldType = 'Text';
                     break;
             }
 
-            $this->fields[$name] = new Field\Text(
+            $className = __NAMESPACE__.'\\Field\\'.$fieldType;
+            $this->fields[$name] = new $className(
                 $name,
                 isset($this->postData[$name])? $this->postData[$name] : '',
                 isset($data['attr'])? $data['attr'] : []);
-                // TODO: Set Class Field\XXX from variable
         }
     }
 
