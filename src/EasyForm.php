@@ -55,9 +55,14 @@ class EasyForm {
     /////////////////////////////////////////////
     // Form tags
     /////////////////////////////////////////////
-    public function open($action='')
+    public function open($action='', $method='post')
     {
-        echo '<form action="'.$action.'">';
+        echo '<form action="'.$action.'" method="'.$method.'">';
+    }
+
+    public function submit($value='submit')
+    {
+        echo '<input type="submit" value="'.$value.'">';
     }
 
     public function close()
