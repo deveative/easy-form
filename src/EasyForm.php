@@ -36,22 +36,16 @@ class EasyForm {
         $this->fields = [];
         $fields = $this->config->get('field', []);
         foreach ($fields as $name => $data) {
-            switch (@$data['type']) {
-                case 'email':
-                    $fieldType = 'Email';
-                    break;
-                    // TODO: more types...
-                default:
-                    $fieldType = 'Text';
-                    break;
-            }
+            $fieldType = isset($data['type']) ? $data['type'] : 'text';
 
-            $className = __NAMESPACE__.'\\Field\\'.$fieldType;
-            $this->fields[$name] = new $className(
-                $name,
-                isset($data['label'])? $data['label'] : $name,
-                isset($this->postData[$name])? $this->postData[$name] : '',
-                isset($data['attr'])? $data['attr'] : []);
+            $className = __NAMESPACE__.'\\Field\\'.ucfirst($fieldType);
+            if(class_exists($className)) {
+                $this->fields[$name] = new $className(
+                    $name,
+                    isset($data['label'])? $data['label'] : $name,
+                    isset($this->postData[$name])? $this->postData[$name] : '',
+                    isset($data['attr'])? $data['attr'] : []);
+            }
         }
     }
 
