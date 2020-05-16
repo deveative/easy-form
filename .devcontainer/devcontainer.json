@@ -1,0 +1,17 @@
+{
+	"name": "PHP 7 & MariaDB",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "php",
+	
+	"settings": { 
+		"terminal.integrated.shell.linux": "/bin/bash"
+	},
+
+	"extensions": [
+		"felixfbecker.php-debug",
+		"felixfbecker.php-intellisense",
+		"mtxr.sqltools"
+	],
+
+	"workspaceFolder": "/workspace",
+}
